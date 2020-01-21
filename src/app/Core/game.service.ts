@@ -29,7 +29,7 @@ export class GameService {
     this.cases = [];
 
     for (let i = 0; i < 9; i++) {
-      const oCase = new Case(i+1);
+      const oCase = new Case("Zone00" + i+1);
       oCase.setValue('');
       this.cases.push(oCase);
     }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { GameService } from './Core/game.service';
+import { TrackerService } from './Services/tracker.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +16,19 @@ export class AppComponent {
   tour: number;
   scoreJ1 = 0;
   scoreJ2 = 0;
+  tracker;
 
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService, private http: HttpClient) {
     this.cases = this.gameService.cases;
     this.tour = this.gameService.tour;
+    this.tracker = new TrackerService(http);
+    console.log(this.getPosition());
   }
 
+  getPosition() {
+    this.tracker.getTrackerPosition()
+      .subscribe((data) => console.log(data));
+  }
 
   restartGame() {
     this.gameService.initGame();
