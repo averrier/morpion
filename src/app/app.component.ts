@@ -37,7 +37,11 @@ export class AppComponent {
 
   getPosition() {
     this.tracker.getTrackerPosition()
-      .subscribe((data) => console.log(data));
+      .subscribe((data) => {
+        let zone = data.tags[0].zones[0].name;
+        console.log(zone);
+        return zone;
+      });
   }
 
   restartGame() {
