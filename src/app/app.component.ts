@@ -30,10 +30,12 @@ export class AppComponent {
       .subscribe((data) => console.log(data));
   }
 
-  getZone() {
-    let json = JSON.parse(this.getPosition());
+  async getZone() {
+    let json = await this.getPosition();
     console.log(json);
-    let zone = json.tags[0];
+    console.log(json.tags);
+    console.log(json.tags[0]);
+    let zone = json.tags[0].zones[0].name;
     console.log(zone);
     console.log(zone.subscribe(zone.length - 1, zone.length));
     return zone.subscribe(zone.length - 1, zone.length);
