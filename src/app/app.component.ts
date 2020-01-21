@@ -22,12 +22,21 @@ export class AppComponent {
     this.cases = this.gameService.cases;
     this.tour = this.gameService.tour;
     this.tracker = new TrackerService(http);
-    console.log(this.getPosition());
+    console.log(this.getZone());
   }
 
   getPosition() {
-    this.tracker.getTrackerPosition()
+    return this.tracker.getTrackerPosition()
       .subscribe((data) => console.log(data));
+  }
+
+  getZone() {
+    let json = JSON.parse(this.getPosition());
+    console.log(json);
+    let zone = json.tags[0];
+    console.log(zone);
+    console.log(zone.subscribe(zone.length - 1, zone.length));
+    return zone.subscribe(zone.length - 1, zone.length);
   }
 
   restartGame() {
