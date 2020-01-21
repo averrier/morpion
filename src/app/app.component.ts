@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { GameService } from './Core/game.service';
 import { TrackerService } from './Services/tracker.service';
 import { HttpClient } from '@angular/common/http';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,16 @@ export class AppComponent {
     this.cases = this.gameService.cases;
     this.tour = this.gameService.tour;
     this.tracker = new TrackerService(http);
-    console.log(this.getPosition());
+  }
+
+  ngOnInit() {
+    //console.log(this.getPosition());
+    const myTimer = timer(0, 1000);
+    let countPosition = 0;
+
+    myTimer.subscribe(tick => {
+      console.log(this.getPosition());
+    });
   }
 
   getPosition() {
