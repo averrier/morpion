@@ -39,19 +39,21 @@ export class GameService {
 
     // le joueur 2 sera l'IA
     this.j2 = new Joueur();
-    this.j2.computer = true;
+    //this.j2.computer = true;
 
   }
 
 
   getResultats() {
     if (this.draw) {
-      return 'Match null';
+      return 'Match nul :o';
     } else {
       if (this.tour === 0) {
-        return 'Gagné !';
+        //return 'Gagné !';
+        return 'Croix gagne !'
       } else {
-        return 'Perdu :-(';
+        //return 'Perdu :-(';
+        return 'Rond gagne !'
       }
     }
   }

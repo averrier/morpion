@@ -33,6 +33,10 @@ export class AppComponent {
     if (this.gameService.tour === 0) {
       this.play(i);
     }
+    if (this.gameService.tour === 1) {
+      this.play(i);
+    }
+
   }
 
   gameOver() {
@@ -67,7 +71,7 @@ export class AppComponent {
         } else {
           this.tour = this.gameService.changementDeJoueur();
           if (this.gameService.tour === 1) {
-            this.computerTurn();
+            //this.computerTurn();
           }
         }
       }
