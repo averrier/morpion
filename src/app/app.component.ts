@@ -40,7 +40,9 @@ export class AppComponent {
       .subscribe((data) => {
         let zone = data.tags[0].zones[0].name;
         console.log(zone);
-        return zone;
+        if (zone != null) {
+          return zone;
+        }
       });
   }
 
