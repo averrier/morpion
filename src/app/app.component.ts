@@ -29,19 +29,38 @@ export class AppComponent {
     //console.log(this.getPosition());
     const myTimer = timer(0, 1000);
     let countPosition = 0;
+    let previousZone = null;
 
     myTimer.subscribe(tick => {
-      console.log(this.getPosition());
+      //console.log(this.getPosition());
+      this.tracker.getTrackerPosition()
+      .subscribe((data) => {
+        let zone = data.tags[0].zones;
+        if (zone != undefined) {
+          zone = zone[0].name;
+          console.log(zone, countPosition);
+          if( previousZone == zone) {
+            countPosition ++;
+          } else {
+            countPosition = 0;
+          }
+          previousZone = zone;
+          if ( countPosition == 3 ) {
+            this.play(parseInt(zone.substring(zone.length, zone.length-1)) - 1);
+            countPosition = 0;
+          }
+        }
+      });
     });
   }
 
   getPosition() {
     this.tracker.getTrackerPosition()
       .subscribe((data) => {
-        let zone = data.tags[0].zones[0].name;
-        console.log(zone);
-        if (zone != null) {
-          return zone;
+        let zone = data.tags[0].zones;
+        if (zone != undefined) {
+          console.log(zone[0].name);
+          return zone[0].name;
         }
       });
   }
